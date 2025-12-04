@@ -1,12 +1,14 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { use, useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchFoodDetails } from '../../service/foodService';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../context/StoreContext';
 
 const FoodDetails = () => {
     const {id} = useParams();
-
+    const {increaseQty} = useContext(StoreContext)
+    const navigate = useNavigate();
 
     const [data,setData] = useState({});
 
@@ -25,6 +27,11 @@ const FoodDetails = () => {
     }, [id]);
 
 
+    const addToCart = async() => {
+        increaseQty(data.id);
+        navigate("/cart");
+        
+    }
 
 
   return (
@@ -40,7 +47,7 @@ const FoodDetails = () => {
                         </div>
                         <p className="lead">{data.description}</p>
                         <div className="d-flex">
-                            <button className="btn btn-outline-dark flex-shrink-0" type="button">
+                            <button className="btn btn-outline-dark flex-shrink-0" type="button" onClick={addToCart}>
                                 <i className="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>

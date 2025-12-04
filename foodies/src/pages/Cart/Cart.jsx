@@ -2,6 +2,7 @@ import React from 'react'
 import "./Cart.css"
 import { StoreContext } from '../../context/StoreContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { calculateCartTotals } from '../../util/cartUtil';
 
 
 const Cart = () => {
@@ -13,10 +14,8 @@ const Cart = () => {
     const cartItems = foodList.filter(food => quantities[food.id] > 0);
 
     //calculating
-    const subtotal = cartItems.reduce((acc, item) => acc + item.price * quantities[item.id], 0);
-    const shipping = subtotal > 0 ? 10 : 0;
-    const tax = subtotal * 0.1;
-    const total = subtotal + shipping + tax;
+    const {subtotal, shipping, tax, total} = calculateCartTotals(cartItems, quantities);
+    
 
 
   return (
