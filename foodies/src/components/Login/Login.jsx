@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Login.css"
 import { Link } from 'react-router-dom'
+import { loginUser } from '../../service/authService'
 
 const Login = () => {
+
+ const [data,setData] = useState({
+         email: "",
+         password: ""
+     })
+
+  const onChangeHandler = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        setData(data => ({...data, [name]: value}));
+    }
+
+    const onSubmitHandler = async(event) => {
+         event.preventDefault();
+        //  try{
+        //      const response = await loginUser(data);
+        //      if(response.status==201){
+        //          toast.success("lo is completed. Please login");
+        //          navigate("/login");
+ 
+        //      }
+        //      else{
+        //          toast.error("Unable to register. Please try again");
+ 
+        //      }
+        //  }
+        //  catch(err){
+        //      toast.error("Unable to register. Please try again");
+        //  }
+     }
+    
+
   return (
     <div className="login-container">
         <div className="row">
@@ -12,11 +46,11 @@ const Login = () => {
                 <h5 className="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
                 <form>
                 <div className="form-floating mb-3">
-                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" name='email' onChange={onChangeHandler} value={data.email}/>
                     <label htmlFor="floatingInput">Email address</label>
                 </div>
                 <div className="form-floating mb-3">
-                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" name='password' onChangeHandler={onChangeHandler} value={data.password}/>
                     <label htmlFor="floatingPassword">Password</label>
                 </div>
                 <div className="d-grid">
