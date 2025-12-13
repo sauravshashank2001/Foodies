@@ -64,7 +64,7 @@ const Menubar = () => {
                                 <img src={assets.profile} alt="" width={32} height={32} className='rounded-circle'/>
                             </a>
                             <ul className='dropdown-menu text-small'>
-                                <li className='dropdown-item' onClick={()=>navigate("/myOrders")}>Orders</li>
+                                <li className='dropdown-item' onClick={()=>navigate("/myorders")}>Orders</li>
                                 <li className='dropdown-item' onClick={logout}>Logout</li>
 
                             </ul>

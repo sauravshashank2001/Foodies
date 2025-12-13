@@ -9,7 +9,7 @@ export const StoreContextProvider = (props) => {
 
     const [foodList,setFoodList] = useState([]);
 
-    const [quantities,setQuantities] = useState([]);
+    const [quantities,setQuantities] = useState({});
 
     const [token,setToken] = useState("");
 
@@ -34,7 +34,7 @@ export const StoreContextProvider = (props) => {
 
     const loadCartData = async( token ) => {
         const items =await getCartData(token);
-        setQuantities(items);
+        setQuantities(items || {}); 
 
     }
     
